@@ -2,6 +2,7 @@ package co.edu.uniquindio.transporte.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Propietario {
     private String nombre;
@@ -10,7 +11,7 @@ public class Propietario {
     private String numeroCelular;
     private Vehiculo vehiculo;
 
-    private List<VehiculoCarga> listaVehiculosAsociados = new ArrayList<>();
+    private List<Vehiculo> listaVehiculosAsociados = new ArrayList<>();
 
     EmpresaTransporte ownedByEmpresaTransporte;
 
@@ -75,11 +76,27 @@ public class Propietario {
         this.vehiculo = vehiculo;
     }
 
-    public List<VehiculoCarga> getListaVehiculosAsociados() {
+    public List<Vehiculo> getListaVehiculosAsociados() {
         return listaVehiculosAsociados;
     }
 
-    public void setListaVehiculosAsociados(List<VehiculoCarga> listaVehiculosAsociados) {
+    public void setListaVehiculosAsociados(List<Vehiculo> listaVehiculosAsociados) {
         this.listaVehiculosAsociados = listaVehiculosAsociados;
+    }
+
+    public static Propietario ingresarDatosPropietario(EmpresaTransporte empresa){
+        Scanner scanner = new Scanner(System.in);
+        Propietario datosPropietario = new Propietario();
+        System.out.println("Ingrese el nombre del propietario");
+        datosPropietario.setNombre(scanner.nextLine());
+        System.out.println("Ingrese la cedula del propietario");
+        datosPropietario.setNumeroIdentificacion(scanner.nextLine());
+        System.out.println("Ingrese el email del propietario");
+        datosPropietario.setEmail(scanner.nextLine());
+        System.out.println("Ingrese el numero de celular del propietario");
+        datosPropietario.setNumeroCelular(scanner.nextLine());
+
+        empresa.getListaPropietarios().add(datosPropietario);
+        return datosPropietario;
     }
 }

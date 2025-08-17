@@ -1,5 +1,7 @@
 package co.edu.uniquindio.transporte.model;
 
+import java.util.Scanner;
+
 public class Vehiculo {
     private String placa;
     private String modelo;
@@ -62,5 +64,26 @@ public class Vehiculo {
                 ", marca='" + marca + '\'' +
                 ", color='" + color + '\'' +
                 '}';
+    }
+
+    public static Vehiculo seleccionarTipoVehiculo(EmpresaTransporte empresa, Propietario propietario){
+        Scanner scanner = new Scanner(System.in);
+        VehiculoCarga tipoVehiculoCarga = new VehiculoCarga();
+        VehiculoPasajero tipoVehiculoPasajero = new VehiculoPasajero();
+        System.out.println("Seleccione el tipo de vehiculo");
+        System.out.println("1.Vehiculo de Carga 2.Vehiculo de Pasajeros");
+        int respuesta = scanner.nextInt();
+        scanner.nextLine();
+        switch (respuesta){
+            case 1:
+                tipoVehiculoCarga.ingresarDatosVehiculoCarga(empresa, propietario);
+                break;
+            case 2:
+                tipoVehiculoPasajero.ingresarDatosVehiculoPasajero(empresa, propietario);
+                break;
+            default:
+                System.out.println("Opcion no valida");
+        }
+        return null;
     }
 }

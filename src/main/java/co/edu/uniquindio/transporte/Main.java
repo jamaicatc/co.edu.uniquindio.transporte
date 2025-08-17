@@ -1,7 +1,7 @@
 package co.edu.uniquindio.transporte;
 
 import co.edu.uniquindio.transporte.factory.ModelFactory;
-import co.edu.uniquindio.transporte.model.EmpresaTransporte;
+import co.edu.uniquindio.transporte.model.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,6 +9,8 @@ public class Main {
         EmpresaTransporte empresaTransporte = modelFactory.inicializarDatos();
         crearPropietarioVehiculoCarga(modelFactory);
         calcularTotalPasajerosTransportados(empresaTransporte);
+        Propietario p = Propietario.ingresarDatosPropietario(empresaTransporte);
+        Vehiculo v = Vehiculo.seleccionarTipoVehiculo(empresaTransporte, p);
     }
 
     private static void calcularTotalPasajerosTransportados(EmpresaTransporte empresaTransporte) {
