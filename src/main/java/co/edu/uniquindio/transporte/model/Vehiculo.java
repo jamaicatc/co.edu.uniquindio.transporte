@@ -66,11 +66,11 @@ public class Vehiculo {
                 '}';
     }
 
-    public static Vehiculo seleccionarTipoVehiculo(EmpresaTransporte empresa, Propietario propietario){
+    public static void seleccionarTipoVehiculo(EmpresaTransporte empresa, Propietario propietario){
         Scanner scanner = new Scanner(System.in);
         VehiculoCarga tipoVehiculoCarga = new VehiculoCarga();
         VehiculoPasajero tipoVehiculoPasajero = new VehiculoPasajero();
-        System.out.println("Seleccione el tipo de vehiculo");
+        System.out.println("Seleccione el tipo de vehiculo\n");
         System.out.println("1.Vehiculo de Carga 2.Vehiculo de Pasajeros");
         int respuesta = scanner.nextInt();
         scanner.nextLine();
@@ -84,6 +84,13 @@ public class Vehiculo {
             default:
                 System.out.println("Opcion no valida");
         }
-        return null;
     }
+
+    public static String buscarPlaca(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("ingrese la placa del vehiculo de pasajeros");
+
+        return scanner.nextLine();
+    }
+
 }

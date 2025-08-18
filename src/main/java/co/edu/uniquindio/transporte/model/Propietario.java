@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Propietario {
     private String nombre;
+    private int edad;
     private String numeroIdentificacion;
     private String email;
     private String numeroCelular;
@@ -42,10 +43,19 @@ public class Propietario {
         this.numeroIdentificacion = numeroIdentificacion;
     }
 
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
     @Override
     public String toString() {
         return "Propietario{" +
                 "nombre='" + nombre + '\'' +
+                ", edad=" + edad +
                 ", numeroIdentificacion='" + numeroIdentificacion + '\'' +
                 ", email='" + email + '\'' +
                 ", numeroCelular='" + numeroCelular + '\'' +
@@ -89,6 +99,9 @@ public class Propietario {
         Propietario datosPropietario = new Propietario();
         System.out.println("Ingrese el nombre del propietario");
         datosPropietario.setNombre(scanner.nextLine());
+        System.out.println("Ingrese la edad del propietario");
+        datosPropietario.setEdad(scanner.nextInt());
+        scanner.nextLine(); //evita el salto de linea
         System.out.println("Ingrese la cedula del propietario");
         datosPropietario.setNumeroIdentificacion(scanner.nextLine());
         System.out.println("Ingrese el email del propietario");

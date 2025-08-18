@@ -33,6 +33,7 @@ public class ModelFactory {
         vehiculoPasajero.setNumeroMaximoPasajeros(10);
         Propietario propietario = new Propietario();
         propietario.setNombre("Pedro");
+        propietario.setEdad(45);
         propietario.setVehiculo(vehiculoCarga);
         propietario.getListaVehiculosAsociados().add(vehiculoCarga2);
         empresa.getListaVehiculosCarga().add(vehiculoCarga);

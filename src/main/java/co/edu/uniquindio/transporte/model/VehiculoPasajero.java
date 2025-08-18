@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class VehiculoPasajero extends Vehiculo{
     private int numeroMaximoPasajeros;
+    private int pasajerosTransportados;
 
     public VehiculoPasajero() {
     }
@@ -23,6 +24,14 @@ public class VehiculoPasajero extends Vehiculo{
         this.numeroMaximoPasajeros = numeroMaximoPasajeros;
     }
 
+    public int getPasajerosTransportados() {
+        return pasajerosTransportados;
+    }
+
+    public void setPasajerosTransportados(int pasajerosTransportados) {
+        this.pasajerosTransportados = pasajerosTransportados;
+    }
+
     @Override
     public void encender() {
         System.out.println("No me encendio......ayuda");
@@ -30,10 +39,11 @@ public class VehiculoPasajero extends Vehiculo{
 
     public VehiculoPasajero ingresarDatosVehiculoPasajero(EmpresaTransporte empresa, Propietario propietario){
         Scanner scanner = new Scanner(System.in);
-        Propietario p = new Propietario();
         VehiculoPasajero vehiculoPasajero = new VehiculoPasajero();
         System.out.println("Ingrese la placa del Vehiculo de Pasajeros: ");
         vehiculoPasajero.setPlaca(scanner.nextLine());
+        System.out.println("Ingrese el modelo del Vehiculo de Carga: ");
+        vehiculoPasajero.setModelo(scanner.nextLine());
         System.out.println("Ingrese la marca del Vehiculo de Pasajeros: ");
         vehiculoPasajero.setMarca(scanner.nextLine());
         System.out.println("Ingrese el color del Vehiculo de Pasajeros: ");
@@ -41,12 +51,11 @@ public class VehiculoPasajero extends Vehiculo{
         System.out.println("Ingrese el numero maximo de pasajeros del Vehiculo de Pasajeros: ");
         vehiculoPasajero.setNumeroMaximoPasajeros(scanner.nextInt());
         empresa.getListaVehiculosPasajeros().add(vehiculoPasajero);
-        p.getListaVehiculosAsociados().add(vehiculoPasajero);
         propietario.setVehiculo(vehiculoPasajero);
         propietario.getListaVehiculosAsociados().add(vehiculoPasajero);
 
         return vehiculoPasajero;
     }
-    
+
 
 }
