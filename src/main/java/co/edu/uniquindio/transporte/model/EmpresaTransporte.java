@@ -89,6 +89,32 @@ public class EmpresaTransporte {
         return false;
     }
 
+    //CRUD VEHICULO
+    public boolean agregarVehiculo(String cedulaPropietario, Vehiculo vehiculo){
+        Propietario propietario = obtenerPropietario(cedulaPropietario);
+        if (propietario == null) {
+            return false;
+        }
+
+        if (vehiculo instanceof VehiculoCarga) {
+            listaVehiculosCarga.add((VehiculoCarga) vehiculo);
+        } else if (vehiculo instanceof VehiculoPasajero) {
+            listaVehiculosPasajeros.add((VehiculoPasajero) vehiculo);
+        }
+
+        return true;
+    }
+
+//    public Propietario obtenerVehiculo(String placa){
+//    }
+//
+//    public boolean eliminarVehiculo(String placa){
+//    }
+//
+//    public boolean actualizarVehiculo(Vehiculo vehiculoActualizado){
+//
+//    }
+
     public ArrayList listaDePropietariosPesados(double peso){
         ArrayList<Propietario> propietariosPesados = new ArrayList<>();
         for (VehiculoCarga v: listaVehiculosCarga) {

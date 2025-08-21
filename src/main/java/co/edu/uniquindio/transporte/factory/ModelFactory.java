@@ -1,9 +1,7 @@
 package co.edu.uniquindio.transporte.factory;
 
-import co.edu.uniquindio.transporte.model.EmpresaTransporte;
-import co.edu.uniquindio.transporte.model.Propietario;
-import co.edu.uniquindio.transporte.model.VehiculoCarga;
-import co.edu.uniquindio.transporte.model.VehiculoPasajero;
+import co.edu.uniquindio.transporte.model.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,5 +41,22 @@ public class ModelFactory {
     public boolean actualizarPropietario(Propietario propietario){
         return empresaTransporte.actualizarPropietario(propietario);
     }
+
+    //CRUD VEHICULO
+    public boolean agregarVehiculo(String cedulaPropietario, Vehiculo vehiculo) {
+        return empresaTransporte.agregarVehiculo(cedulaPropietario, vehiculo);
+    }
+
+//    public Propietario obtenerVehiculo(String placa){
+//        return empresaTransporte.obtenerVehiculo(placa);
+//    }
+//
+//    public boolean eliminarVehiculo(String placa){
+//        return empresaTransporte.eliminarVehiculo(placa);
+//    }
+//
+//    public boolean actualizarVehiculo(Vehiculo vehiculo){
+//        return empresaTransporte.actualizarVehiculo(vehiculo);
+//    }
 
 }

@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class VehiculoCarga extends Vehiculo{
     private double capacidadCarga;
     private int numeroEjes;
+
     public VehiculoCarga() {
     }
 
