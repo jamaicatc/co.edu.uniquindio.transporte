@@ -1,5 +1,6 @@
 package co.edu.uniquindio.transporte.model;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -47,13 +48,45 @@ public class EmpresaTransporte {
         this.listaPropietarios = listaPropietarios;
     }
 
-    public void crearPropietarioVehiculoCarga(String propietario, String vehiculo) {
-        Propietario propietarioObj = new Propietario();
-        propietarioObj.setNombre(propietario);
-        VehiculoCarga vehiculoObj = new VehiculoCarga();
-        vehiculoObj.setPlaca(vehiculo);
-        propietarioObj.setVehiculo(vehiculoObj);
-        listaPropietarios.add(propietarioObj);
+    //CRUD PROPIETARIO
+    public boolean agregarPropietario(Propietario propietario){
+        for(Propietario p: listaPropietarios){
+            if(p.getNumeroIdentificacion().equals(propietario.getNumeroIdentificacion()));{
+                return false;
+            }
+        }
+        listaPropietarios.add(propietario);
+        return true;
+    }
+
+    public Propietario obtenerPropietario(String cedula){
+        for (Propietario p : listaPropietarios) {
+            if (p.getNumeroIdentificacion().equals(cedula)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public boolean eliminarPropietario(String cedula){
+        Propietario p = obtenerPropietario(cedula);
+        if (p != null){
+            listaPropietarios.remove(p);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean actualizarPropietario(Propietario propietarioActualizado){
+        Propietario existente = obtenerPropietario(propietarioActualizado.getNumeroIdentificacion());
+        if (existente != null){
+            existente.setNombre(propietarioActualizado.getNombre());
+            existente.setEdad(propietarioActualizado.getEdad());
+            existente.setEmail(propietarioActualizado.getEmail());
+            existente.setNumeroCelular(propietarioActualizado.getNumeroCelular());
+            return true;
+        }
+        return false;
     }
 
     public ArrayList listaDePropietariosPesados(double peso){

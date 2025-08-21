@@ -8,48 +8,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModelFactory {
-    private static ModelFactory instance;
-
-    EmpresaTransporte empresaTransporte;
+    private static ModelFactory modelFactory;
+    private EmpresaTransporte empresaTransporte;
 
     private ModelFactory() {
+        empresaTransporte = new EmpresaTransporte();
     }
 
     public static ModelFactory getInstance() {
-        if(instance == null) {
-            instance = new ModelFactory();
+        if(modelFactory == null) {
+            modelFactory = new ModelFactory();
         }
-        return instance;
-    }
-
-    public EmpresaTransporte inicializarDatos() {
-        EmpresaTransporte empresa = new EmpresaTransporte();
-        empresa.setNombre("La carreta");
-        VehiculoCarga vehiculoCarga = new VehiculoCarga();
-        vehiculoCarga.setCapacidadCarga(200);
-        VehiculoCarga vehiculoCarga2 = new VehiculoCarga();
-        vehiculoCarga2.setCapacidadCarga(500);
-        VehiculoPasajero vehiculoPasajero = new VehiculoPasajero();
-        vehiculoPasajero.setNumeroMaximoPasajeros(10);
-        Propietario propietario = new Propietario();
-        propietario.setNombre("Pedro");
-        propietario.setEdad(45);
-        propietario.setVehiculo(vehiculoCarga);
-        propietario.getListaVehiculosAsociados().add(vehiculoCarga2);
-        empresa.getListaVehiculosCarga().add(vehiculoCarga);
-        empresa.getListaVehiculosPasajeros().add(vehiculoPasajero);
-        empresa.getListaPropietarios().add(propietario);
-        this.empresaTransporte = empresa;
-
-        return empresa;
+        return modelFactory;
     }
 
     public EmpresaTransporte getEmpresaTransporte() {
         return empresaTransporte;
     }
 
+    //CRUD PROPIETARIO
 
-    public void crearPropietarioVehiculoCarga(String propietario, String vehiculo) {
-        getEmpresaTransporte().crearPropietarioVehiculoCarga(propietario, vehiculo);
+    public boolean agregarPropietario(Propietario propietario) {
+        return empresaTransporte.agregarPropietario(propietario);
     }
+
+    public Propietario obtenerPropietario(String cedula){
+        return empresaTransporte.obtenerPropietario(cedula);
+    }
+
+    public boolean eliminarPropietario(String cedula){
+        return empresaTransporte.eliminarPropietario(cedula);
+    }
+
+    public boolean actualizarPropietario(Propietario propietario){
+        return empresaTransporte.actualizarPropietario(propietario);
+    }
+
 }

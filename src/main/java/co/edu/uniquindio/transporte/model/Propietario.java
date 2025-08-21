@@ -3,6 +3,7 @@ package co.edu.uniquindio.transporte.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.*;
 
 public class Propietario {
     private String nombre;
@@ -53,13 +54,11 @@ public class Propietario {
 
     @Override
     public String toString() {
-        return "Propietario{" +
-                "nombre='" + nombre + '\'' +
-                ", edad=" + edad +
-                ", numeroIdentificacion='" + numeroIdentificacion + '\'' +
-                ", email='" + email + '\'' +
-                ", numeroCelular='" + numeroCelular + '\'' +
-                '}';
+        return "Nombre: " + nombre + "\n" +
+                "Edad: " + edad + "\n" +
+                "Numero de Identificación: " + numeroIdentificacion + "\n" +
+                "Email: " + email + '\n' +
+                "Numero de Celular: " + numeroCelular;
     }
 
     public String getEmail() {
@@ -92,24 +91,5 @@ public class Propietario {
 
     public void setListaVehiculosAsociados(List<Vehiculo> listaVehiculosAsociados) {
         this.listaVehiculosAsociados = listaVehiculosAsociados;
-    }
-
-    public static Propietario ingresarDatosPropietario(EmpresaTransporte empresa){
-        Scanner scanner = new Scanner(System.in);
-        Propietario datosPropietario = new Propietario();
-        System.out.println("Ingrese el nombre del propietario");
-        datosPropietario.setNombre(scanner.nextLine());
-        System.out.println("Ingrese la edad del propietario");
-        datosPropietario.setEdad(scanner.nextInt());
-        scanner.nextLine(); //evita el salto de linea
-        System.out.println("Ingrese la cedula del propietario");
-        datosPropietario.setNumeroIdentificacion(scanner.nextLine());
-        System.out.println("Ingrese el email del propietario");
-        datosPropietario.setEmail(scanner.nextLine());
-        System.out.println("Ingrese el numero de celular del propietario");
-        datosPropietario.setNumeroCelular(scanner.nextLine());
-
-        empresa.getListaPropietarios().add(datosPropietario);
-        return datosPropietario;
     }
 }
