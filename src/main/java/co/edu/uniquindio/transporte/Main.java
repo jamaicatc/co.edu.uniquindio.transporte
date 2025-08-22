@@ -17,9 +17,9 @@ public class Main {
     //CRUD PROPIETARIO
     private static void crudPropietario(ModelFactory modelFactory){
         agregarPropietario();
-        obtenerPropietario();
-        eliminarPropietario();
-        actualizarPropietario();
+//        obtenerPropietario();
+//        eliminarPropietario();
+//        actualizarPropietario();
     }
 
     private static void agregarPropietario(){
@@ -117,8 +117,8 @@ public class Main {
     private static void crudVehiculo(ModelFactory modelFactory){
         agregarVehiculo();
         obtenerVehiculo();
-        eliminarVehiculo();
-        actualizarVehiculo();
+//        eliminarVehiculo();
+//        actualizarVehiculo();
     }
 
     private static void agregarVehiculo() {
@@ -139,7 +139,6 @@ public class Main {
         } else if (eleccion == 1) {
             vehiculo = agregarVehiculoPasajero();
         }
-
     }
 
     private static Vehiculo agregarVehiculoCarga(){
@@ -213,11 +212,11 @@ public class Main {
 
     private static void obtenerVehiculo(){
         String cedula = JOptionPane.showInputDialog(null, "Buscar Propietario por cedula:");
-        Propietario propietario = ModelFactory.getInstance().obtenerPropietario(cedula);
-        if (propietario != null) {
-            JOptionPane.showMessageDialog(null, "Propietario encontrado:\n" + propietario.toString());
+        Vehiculo vehiculo = ModelFactory.getInstance().obtenerVehiculo(cedula);
+        if (vehiculo != null) {
+            JOptionPane.showMessageDialog(null, "Vehiculo encontrado:\n" + vehiculo.toString());
         } else {
-            JOptionPane.showMessageDialog(null, "No se encontró un propietario con la cédula: " + cedula);
+            JOptionPane.showMessageDialog(null, "No se encontró la cedula perteneciente al vehiculo: " + cedula);
         }
     }
 

@@ -95,18 +95,34 @@ public class EmpresaTransporte {
         if (propietario == null) {
             return false;
         }
-
+        vehiculo.setPropietario(propietario);
         if (vehiculo instanceof VehiculoCarga) {
             listaVehiculosCarga.add((VehiculoCarga) vehiculo);
+            propietario.getListaVehiculosAsociados().add(vehiculo);
         } else if (vehiculo instanceof VehiculoPasajero) {
             listaVehiculosPasajeros.add((VehiculoPasajero) vehiculo);
+            propietario.getListaVehiculosAsociados().add(vehiculo);
         }
 
         return true;
     }
 
-//    public Propietario obtenerVehiculo(String placa){
-//    }
+    public Vehiculo obtenerVehiculo(String cedula){
+        for (VehiculoCarga v : listaVehiculosCarga) {
+            if (v.getPropietario().getNumeroIdentificacion().equals(cedula)) {
+                return v;
+            }
+        }
+
+        for (VehiculoPasajero v : listaVehiculosPasajeros) {
+            if (v.getPropietario().getNumeroIdentificacion().equals(cedula)) {
+                return v;
+            }
+        }
+
+        // Si no se encuentra en ninguna lista
+        return null;
+    }
 //
 //    public boolean eliminarVehiculo(String placa){
 //    }

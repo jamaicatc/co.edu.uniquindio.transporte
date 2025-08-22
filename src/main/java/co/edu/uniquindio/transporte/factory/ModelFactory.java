@@ -47,9 +47,9 @@ public class ModelFactory {
         return empresaTransporte.agregarVehiculo(cedulaPropietario, vehiculo);
     }
 
-//    public Propietario obtenerVehiculo(String placa){
-//        return empresaTransporte.obtenerVehiculo(placa);
-//    }
+    public Vehiculo obtenerVehiculo(String placa){
+        return empresaTransporte.obtenerVehiculo(placa);
+    }
 //
 //    public boolean eliminarVehiculo(String placa){
 //        return empresaTransporte.eliminarVehiculo(placa);
