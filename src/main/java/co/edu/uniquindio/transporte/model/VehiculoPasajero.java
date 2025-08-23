@@ -32,10 +32,6 @@ public class VehiculoPasajero extends Vehiculo{
         this.pasajerosTransportados = pasajerosTransportados;
     }
 
-    @Override
-    public void encender() {
-        System.out.println("No me encendio......ayuda");
-    }
 
     public VehiculoPasajero ingresarDatosVehiculoPasajero(EmpresaTransporte empresa, Propietario propietario){
         Scanner scanner = new Scanner(System.in);

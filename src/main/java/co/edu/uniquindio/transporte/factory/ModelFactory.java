@@ -68,4 +68,21 @@ public class ModelFactory {
         return empresaTransporte.actualizarVehiculo(vehiculo);
     }
 
+    //CRUD USUARIO
+    public boolean agregarUsuario(Usuario usuario){
+        return empresaTransporte.agregarUsuario(usuario);
+    };
+
+    public Usuario obtenerUsuario(int edad){
+        return  empresaTransporte.obtenerUsuario(edad);
+    };
+
+    public boolean eliminarUsuario(int edad){
+        return empresaTransporte.eliminarUsuario(edad);
+    };
+
+    public boolean actualizarUsuario(Usuario usuario){
+        return empresaTransporte.actualizarUsuario(usuario);
+    };
+
 }

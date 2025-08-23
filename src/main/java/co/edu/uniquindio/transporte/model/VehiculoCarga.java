@@ -32,10 +32,6 @@ public class VehiculoCarga extends Vehiculo{
         this.numeroEjes = numeroEjes;
     }
 
-    @Override
-    public void encender() {
-        System.out.println("Endenciendo el vehiculo para cargarlo");
-    }
 
     public VehiculoCarga ingresarDatosVehiculoCarga(EmpresaTransporte empresa, Propietario propietario){
         Scanner scanner = new Scanner(System.in);

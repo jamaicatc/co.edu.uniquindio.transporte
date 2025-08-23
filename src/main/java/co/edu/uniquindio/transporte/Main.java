@@ -10,8 +10,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         ModelFactory modelFactory = ModelFactory.getInstance();
-        crudPropietario(modelFactory);
-        crudVehiculo(modelFactory);
+//        crudPropietario(modelFactory);
+//        crudVehiculo(modelFactory);
+        crudUsuario(modelFactory);
     }
 
     //CRUD PROPIETARIO
@@ -349,6 +350,60 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Vehículo de carga actualizado correctamente");
         } else {
             JOptionPane.showMessageDialog(null, "No se pudo actualizar el vehículo de carga");
+        }
+    }
+
+    //CRUD USUARIO
+    private static void crudUsuario(ModelFactory modelFactory){
+        agregarUsuario();
+        obtenerUsuario();
+        eliminarUsuario();
+        actualizarUsuario();
+    }
+
+    private static void agregarUsuario(){
+        int edad = Integer.parseInt(JOptionPane.showInputDialog(null, "ingrese la edad del usuario"));
+        Usuario datosUsuario = new Usuario();
+        datosUsuario.setEdad(edad);
+        boolean agregado = ModelFactory.getInstance().agregarUsuario(datosUsuario);
+        if (agregado) {
+            JOptionPane.showMessageDialog(null, "Usuario agregado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Ya existe un propietario con esa edad", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private static void obtenerUsuario(){
+        int edad = Integer.parseInt(JOptionPane.showInputDialog(null, "ingrese la edad del usuario a buscar"));
+        Usuario usuario = ModelFactory.getInstance().obtenerUsuario(edad);
+
+        if (usuario != null) {
+            JOptionPane.showMessageDialog(null, "Usuario encontrado:\n" + usuario.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró un usuario con la edad: " + edad);
+        }
+    }
+    private static void eliminarUsuario(){
+        int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad del usuario a eliminar:"));
+        boolean borrado = ModelFactory.getInstance().eliminarUsuario(edad);
+        if (borrado){
+            JOptionPane.showMessageDialog(null, "Usuario eliminado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo eliminar el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private static void actualizarUsuario(){
+        int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad del Usuario a actualizar"));
+        Usuario usuario = ModelFactory.getInstance().obtenerUsuario(edad);
+        if (usuario == null){
+            JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+            return;
+        }
+        usuario.setEdad(Integer.parseInt(JOptionPane.showInputDialog("Nueva edad: ")));
+        boolean actualizado = ModelFactory.getInstance().actualizarUsuario(usuario);
+        if (actualizado){
+            JOptionPane.showMessageDialog(null, "Usuario actualizado correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar el usuario");
         }
     }
 

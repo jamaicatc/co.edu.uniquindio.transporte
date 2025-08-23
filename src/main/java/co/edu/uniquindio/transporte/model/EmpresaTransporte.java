@@ -12,6 +12,7 @@ public class EmpresaTransporte {
     private List<VehiculoCarga> listaVehiculosCarga = new ArrayList<>();
     private List<VehiculoPasajero> listaVehiculosPasajeros = new ArrayList<>();
     private List<Propietario> listaPropietarios = new ArrayList<>();
+    private List<Usuario> listaUsuarios = new ArrayList<>();
 
     public EmpresaTransporte() {
     }
@@ -46,6 +47,14 @@ public class EmpresaTransporte {
 
     public void setListaPropietarios(List<Propietario> listaPropietarios) {
         this.listaPropietarios = listaPropietarios;
+    }
+
+    public List<Usuario> getListaUsuarios() {
+        return listaUsuarios;
+    }
+
+    public void setListaUsuarios(List<Usuario> listaUsuarios) {
+        this.listaUsuarios = listaUsuarios;
     }
 
     //CRUD PROPIETARIO
@@ -182,6 +191,45 @@ public class EmpresaTransporte {
         }
         return false;
     }
+
+    //CRUD USUARIO
+
+    public boolean agregarUsuario(Usuario usuario){
+        for(Usuario u: listaUsuarios){
+            if(u.getEdad() == usuario.getEdad());{
+                return false;
+            }
+        }
+        listaUsuarios.add(usuario);
+        return true;
+    }
+
+    public Usuario obtenerUsuario(int edad){
+        for (Usuario u : listaUsuarios) {
+            if (u.getEdad() == edad) {
+                return u;
+            }
+        }
+        return null;
+    }
+
+    public boolean eliminarUsuario(int edad){
+        Usuario u = obtenerUsuario(edad);
+        if (u != null){
+            listaUsuarios.remove(u);
+            return true;
+        }
+        return false;
+    };
+
+    public boolean actualizarUsuario(Usuario usuarioActualizado){
+        Usuario existente = obtenerUsuario(usuarioActualizado.getEdad());
+        if (existente != null){
+            existente.setEdad(usuarioActualizado.getEdad());
+            return true;
+        }
+        return false;
+    };
 
     public ArrayList listaDePropietariosPesados(double peso){
         ArrayList<Propietario> propietariosPesados = new ArrayList<>();
