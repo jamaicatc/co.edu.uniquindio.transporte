@@ -24,6 +24,11 @@ public class ModelFactory {
         return empresaTransporte;
     }
 
+    public void inicializarDatos() {
+        empresaTransporte = new EmpresaTransporte();
+        empresaTransporte.setNombre("La Carreta");
+    }
+
     //CRUD PROPIETARIO
 
     public boolean agregarPropietario(Propietario propietario) {
@@ -84,5 +89,22 @@ public class ModelFactory {
     public boolean actualizarUsuario(Usuario usuario){
         return empresaTransporte.actualizarUsuario(usuario);
     };
+
+    //Ejercicio solicitados
+    public int calcularTotalPasajerosTransportados(String cedula, int[] viajes){
+        return empresaTransporte.calcularTotalPasajerosTransportados(cedula, viajes);
+    }
+
+    public List<Propietario> listaDePropietariosPesados(double peso) {
+        return empresaTransporte.listaDePropietariosPesados(peso);
+    }
+
+    public String usuariosMovilizadosEnVehiculo(String placa) {
+        return empresaTransporte.usuariosMovilizadosEnVehiculo(placa);
+    }
+
+    public ArrayList<Propietario> propietariosMayores() {
+        return empresaTransporte.propietariosMayores();
+    }
 
 }

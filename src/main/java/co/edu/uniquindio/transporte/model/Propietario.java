@@ -2,8 +2,7 @@ package co.edu.uniquindio.transporte.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import javax.swing.*;
+
 
 public class Propietario {
     private String nombre;
@@ -12,7 +11,6 @@ public class Propietario {
     private String email;
     private String numeroCelular;
     private Vehiculo vehiculo;
-
     private List<Vehiculo> listaVehiculosAsociados = new ArrayList<>();
 
     EmpresaTransporte ownedByEmpresaTransporte;

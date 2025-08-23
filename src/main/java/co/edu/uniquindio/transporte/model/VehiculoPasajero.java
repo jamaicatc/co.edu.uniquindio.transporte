@@ -2,11 +2,12 @@ package co.edu.uniquindio.transporte.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class VehiculoPasajero extends Vehiculo{
     private int numeroMaximoPasajeros;
     private int pasajerosTransportados;
+    private List<Usuario> listaUsuariosAsociados = new ArrayList<>();
+
 
     public VehiculoPasajero() {
     }
@@ -32,26 +33,11 @@ public class VehiculoPasajero extends Vehiculo{
         this.pasajerosTransportados = pasajerosTransportados;
     }
 
-
-    public VehiculoPasajero ingresarDatosVehiculoPasajero(EmpresaTransporte empresa, Propietario propietario){
-        Scanner scanner = new Scanner(System.in);
-        VehiculoPasajero vehiculoPasajero = new VehiculoPasajero();
-        System.out.println("Ingrese la placa del Vehiculo de Pasajeros: ");
-        vehiculoPasajero.setPlaca(scanner.nextLine());
-        System.out.println("Ingrese el modelo del Vehiculo de Carga: ");
-        vehiculoPasajero.setModelo(scanner.nextLine());
-        System.out.println("Ingrese la marca del Vehiculo de Pasajeros: ");
-        vehiculoPasajero.setMarca(scanner.nextLine());
-        System.out.println("Ingrese el color del Vehiculo de Pasajeros: ");
-        vehiculoPasajero.setColor(scanner.nextLine());
-        System.out.println("Ingrese el numero maximo de pasajeros del Vehiculo de Pasajeros: ");
-        vehiculoPasajero.setNumeroMaximoPasajeros(scanner.nextInt());
-        empresa.getListaVehiculosPasajeros().add(vehiculoPasajero);
-        propietario.setVehiculo(vehiculoPasajero);
-        propietario.getListaVehiculosAsociados().add(vehiculoPasajero);
-
-        return vehiculoPasajero;
+    public List<Usuario> getListaUsuariosAsociados() {
+        return listaUsuariosAsociados;
     }
 
-
+    public void setListaUsuariosAsociados(List<Usuario> listaUsuariosAsociados) {
+        this.listaUsuariosAsociados = listaUsuariosAsociados;
+    }
 }

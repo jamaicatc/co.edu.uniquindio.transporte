@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class EmpresaTransporte {
     private String nombre;
@@ -193,7 +192,6 @@ public class EmpresaTransporte {
     }
 
     //CRUD USUARIO
-
     public boolean agregarUsuario(Usuario usuario){
         for(Usuario u: listaUsuarios){
             if(u.getEdad() == usuario.getEdad());{
@@ -231,50 +229,48 @@ public class EmpresaTransporte {
         return false;
     };
 
-    public ArrayList listaDePropietariosPesados(double peso){
-        ArrayList<Propietario> propietariosPesados = new ArrayList<>();
-        for (VehiculoCarga v: listaVehiculosCarga) {
-            if (peso > v.getCapacidadCarga()){
-                System.out.println("la lista de propietarios que superan el peso de carga son: ");
-                for (Propietario p: listaPropietarios){
-                    System.out.println(p.getNombre() + "esta excedido, su capacidad de carga");
+    //Ejercicio solicitados
+    public int calcularTotalPasajerosTransportados(String cedula, int[] numviajes){
+        VehiculoPasajero vehiculo = obtenerVehiculoPasajero(cedula);
+        if (vehiculo == null) {
+            return -1;
+        }
+        int suma = 0;
+        for (int pasajeros : numviajes) {
+            suma += pasajeros;
+        }
+        vehiculo.setPasajerosTransportados(suma);
+        return suma;
+    }
+
+    public List<Propietario> listaDePropietariosPesados(double peso) {
+        List<Propietario> propietariosPesados = new ArrayList<>();
+        for (VehiculoCarga v : listaVehiculosCarga) {
+            if (peso > v.getCapacidadCarga()) {
+                Propietario p = v.getPropietario();
+                if (p != null && !propietariosPesados.contains(p)) {
                     propietariosPesados.add(p);
                 }
-            } else {
-                System.out.println("no hay propietarios excedidos");
             }
         }
         return propietariosPesados;
     }
 
-    public static double ingresarPeso(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("ingrese el peso de carga");
-
-        return scanner.nextDouble();
-    }
-
-    public void usuariosMovilizadosEnVehiculo(EmpresaTransporte empresa, String placa){
-        for (VehiculoPasajero v: empresa.getListaVehiculosPasajeros()){
-            if (Objects.equals(v.getPlaca(), placa)){
-                System.out.println("El vehiculo con placa: " + placa + " Transporto " + v.getPasajerosTransportados() + " Pasajeros");
-                return;
+    public String usuariosMovilizadosEnVehiculo(String placa) {
+        for (VehiculoPasajero v : listaVehiculosPasajeros) {
+            if (Objects.equals(v.getPlaca(), placa)) {
+                return "El vehículo con placa " + placa + " transportó " + v.getPasajerosTransportados() + " pasajeros.";
             }
         }
-        System.out.println("No se encontró un vehículo con la placa " + placa);
+        return "No se encontró un vehículo con la placa " + placa;
     }
 
-    public ArrayList propietariosMayores(){
+    public ArrayList<Propietario> propietariosMayores() {
         ArrayList<Propietario> propietariosMayores = new ArrayList<>();
-        for (Propietario p: listaPropietarios){
-            if (p.getEdad() > 40){
+        for (Propietario p : listaPropietarios) {
+            if (p.getEdad() > 40) {
                 propietariosMayores.add(p);
             }
-        }
-
-        System.out.println("Los propietarios mayores de 40 años son:");
-        for (Propietario r: propietariosMayores){
-            System.out.println(r.getNombre());
         }
         return propietariosMayores;
     }

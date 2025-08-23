@@ -4,23 +4,26 @@ import co.edu.uniquindio.transporte.factory.ModelFactory;
 import co.edu.uniquindio.transporte.model.*;
 
 import javax.swing.*;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Main {
     public static void main(String[] args) {
         ModelFactory modelFactory = ModelFactory.getInstance();
-//        crudPropietario(modelFactory);
-//        crudVehiculo(modelFactory);
+        modelFactory.inicializarDatos();
+        crudPropietario(modelFactory);
+        crudVehiculo(modelFactory);
         crudUsuario(modelFactory);
+        ejerciciosSolicitados(modelFactory);
     }
 
     //CRUD PROPIETARIO
     private static void crudPropietario(ModelFactory modelFactory){
         agregarPropietario();
-//        obtenerPropietario();
-//        eliminarPropietario();
-//        actualizarPropietario();
+        obtenerPropietario();
+        actualizarPropietario();
+        eliminarPropietario();
     }
 
     private static void agregarPropietario(){
@@ -36,7 +39,7 @@ public class Main {
                 "Email:", emailField,
                 "Telefono:", numeroCelularField
         };
-        int opcion = JOptionPane.showConfirmDialog(null, mensaje,"ingresar Datos",JOptionPane.OK_CANCEL_OPTION);
+        int opcion = JOptionPane.showConfirmDialog(null, mensaje,"Ingresar Datos Propietario",JOptionPane.OK_CANCEL_OPTION);
         if (opcion == JOptionPane.OK_OPTION){
             Propietario datosPropietario = new Propietario();
             datosPropietario.setNombre(nombreField.getText());
@@ -118,7 +121,7 @@ public class Main {
     private static void crudVehiculo(ModelFactory modelFactory){
         agregarVehiculo();
         obtenerVehiculo();
-//        eliminarVehiculo();
+        eliminarVehiculo();
         actualizarVehiculo();
     }
 
@@ -176,6 +179,7 @@ public class Main {
         }
         return datosVehiculo;
     }
+
     private static Vehiculo agregarVehiculoPasajero(){
         JTextField placaField = new JTextField();
         JTextField modeloField = new JTextField();
@@ -407,23 +411,70 @@ public class Main {
         }
     }
 
-    private static int calcularTotalPasajerosTransportados(EmpresaTransporte empresaTransporte, String placa) {
-        Scanner scanner = new Scanner(System.in);
-        int suma = 0;
-        for (VehiculoPasajero v: empresaTransporte.getListaVehiculosPasajeros()){
-            if (Objects.equals(v.getPlaca(), placa)){
-                System.out.println("Ingrese el numero de viajes que hizo en el dia");
-                int numViajes = scanner.nextInt();
-                for (int i = 1; i <= numViajes; i++) {
-                    System.out.println("Ingrese la cantidad de pasajeros del viaje " + i);
-                    int cantidadPasajeros = scanner.nextInt();
-                    suma += cantidadPasajeros;
-                }
-                v.setPasajerosTransportados(suma);
-                System.out.println("la cantidad de pasajeros del dia fue: " + suma);
-            }
-        }
-        return suma;
+    //Ejercicio solicitados
+    private static void ejerciciosSolicitados(ModelFactory modelFactory){
+        calcularTotalPasajerosTransportados();
+        mostrarPropietariosPesados();
+        mostrarUsuariosMovilizados();
+        mostrarPropietariosMayores();
     }
 
+    private static void calcularTotalPasajerosTransportados() {
+        ModelFactory modelFactory = ModelFactory.getInstance();
+        String placa = JOptionPane.showInputDialog("Ingrese la cedula del conductor: ");
+        int numViajes = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de viajes que hizo en el día"));
+        int[] viajes = new int[numViajes];
+        for (int i = 0; i < numViajes; i++) {
+            viajes[i] = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de pasajeros del viaje " + (i + 1)));
+        }
+        int total = modelFactory.calcularTotalPasajerosTransportados(placa, viajes);
+        if (total == -1) {
+            JOptionPane.showMessageDialog(null, "Vehículo no encontrado");
+        } else {
+            JOptionPane.showMessageDialog(null, "La cantidad total de pasajeros transportados es: " + total);
+        }
+    }
+
+    private static void mostrarPropietariosPesados() {
+        ModelFactory modelFactory = ModelFactory.getInstance();
+        double peso = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el peso de carga"));
+
+        List<Propietario> propietariosPesados = modelFactory.listaDePropietariosPesados(peso);
+
+        if (propietariosPesados.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay propietarios excedidos.");
+        } else {
+            StringBuilder sb = new StringBuilder("Propietarios que exceden la capacidad:\n");
+            for (Propietario p : propietariosPesados) {
+                sb.append("- ").append(p.getNombre()).append("\n");
+            }
+            JOptionPane.showMessageDialog(null, sb.toString());
+        }
+    }
+
+    private static void mostrarUsuariosMovilizados() {
+        ModelFactory modelFactory = ModelFactory.getInstance();
+
+        String placa = JOptionPane.showInputDialog("Ingrese la placa del vehículo");
+        String resultado = modelFactory.usuariosMovilizadosEnVehiculo(placa);
+
+        JOptionPane.showMessageDialog(null, resultado);
+    }
+
+
+    private static void mostrarPropietariosMayores() {
+        ModelFactory modelFactory = ModelFactory.getInstance();
+
+        ArrayList<Propietario> propietariosMayores = modelFactory.propietariosMayores();
+
+        if (propietariosMayores.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay propietarios mayores de 40 años.");
+        } else {
+            StringBuilder sb = new StringBuilder("Propietarios mayores de 40 años:\n");
+            for (Propietario p : propietariosMayores) {
+                sb.append(p.getNombre()).append(" (").append(p.getEdad()).append(" años)\n");
+            }
+            JOptionPane.showMessageDialog(null, sb.toString());
+        }
+    }
 }
