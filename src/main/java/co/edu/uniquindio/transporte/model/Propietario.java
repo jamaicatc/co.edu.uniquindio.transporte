@@ -3,14 +3,15 @@ package co.edu.uniquindio.transporte.model;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Propietario {
     private String nombre;
+    private int edad;
     private String numeroIdentificacion;
     private String email;
     private String numeroCelular;
     private Vehiculo vehiculo;
-
-    private List<VehiculoCarga> listaVehiculosAsociados = new ArrayList<>();
+    private List<Vehiculo> listaVehiculosAsociados = new ArrayList<>();
 
     EmpresaTransporte ownedByEmpresaTransporte;
 
@@ -41,14 +42,21 @@ public class Propietario {
         this.numeroIdentificacion = numeroIdentificacion;
     }
 
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
     @Override
     public String toString() {
-        return "Propietario{" +
-                "nombre='" + nombre + '\'' +
-                ", numeroIdentificacion='" + numeroIdentificacion + '\'' +
-                ", email='" + email + '\'' +
-                ", numeroCelular='" + numeroCelular + '\'' +
-                '}';
+        return "Nombre: " + nombre + "\n" +
+                "Edad: " + edad + "\n" +
+                "Numero de Identificación: " + numeroIdentificacion + "\n" +
+                "Email: " + email + '\n' +
+                "Numero de Celular: " + numeroCelular;
     }
 
     public String getEmail() {
@@ -75,11 +83,11 @@ public class Propietario {
         this.vehiculo = vehiculo;
     }
 
-    public List<VehiculoCarga> getListaVehiculosAsociados() {
+    public List<Vehiculo> getListaVehiculosAsociados() {
         return listaVehiculosAsociados;
     }
 
-    public void setListaVehiculosAsociados(List<VehiculoCarga> listaVehiculosAsociados) {
+    public void setListaVehiculosAsociados(List<Vehiculo> listaVehiculosAsociados) {
         this.listaVehiculosAsociados = listaVehiculosAsociados;
     }
 }

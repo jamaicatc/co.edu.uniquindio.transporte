@@ -1,7 +1,13 @@
 package co.edu.uniquindio.transporte.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class VehiculoPasajero extends Vehiculo{
     private int numeroMaximoPasajeros;
+    private int pasajerosTransportados;
+    private List<Usuario> listaUsuariosAsociados = new ArrayList<>();
+
 
     public VehiculoPasajero() {
     }
@@ -19,9 +25,19 @@ public class VehiculoPasajero extends Vehiculo{
         this.numeroMaximoPasajeros = numeroMaximoPasajeros;
     }
 
-    @Override
-    public void encender() {
-        System.out.println("No me encendio......ayuda");
+    public int getPasajerosTransportados() {
+        return pasajerosTransportados;
     }
 
+    public void setPasajerosTransportados(int pasajerosTransportados) {
+        this.pasajerosTransportados = pasajerosTransportados;
+    }
+
+    public List<Usuario> getListaUsuariosAsociados() {
+        return listaUsuariosAsociados;
+    }
+
+    public void setListaUsuariosAsociados(List<Usuario> listaUsuariosAsociados) {
+        this.listaUsuariosAsociados = listaUsuariosAsociados;
+    }
 }

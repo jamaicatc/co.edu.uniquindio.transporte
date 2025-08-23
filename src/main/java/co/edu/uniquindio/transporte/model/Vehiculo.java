@@ -5,6 +5,7 @@ public class Vehiculo {
     private String modelo;
     private String marca;
     private String color;
+    private Propietario propietario;
 
     public Vehiculo() {
     }
@@ -48,19 +49,20 @@ public class Vehiculo {
         this.color = color;
     }
 
+    public Propietario getPropietario() {
+        return propietario;
+    }
 
-
-    public void encender(){
-        System.out.println("Encendiendo mi vehiculo");
+    public void setPropietario(Propietario propietario) {
+        this.propietario = propietario;
     }
 
     @Override
     public String toString() {
-        return "Vehiculo{" +
-                "placa='" + placa + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", marca='" + marca + '\'' +
-                ", color='" + color + '\'' +
-                '}';
+        return "Placa: " + placa + '\n' +
+                "Modelo: " + modelo + '\n' +
+                "Marca: " + marca + '\n' +
+                "Color: " + color;
     }
+
 }

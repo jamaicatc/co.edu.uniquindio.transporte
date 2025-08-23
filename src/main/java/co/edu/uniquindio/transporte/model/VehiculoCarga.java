@@ -7,7 +7,6 @@ public class VehiculoCarga extends Vehiculo{
     public VehiculoCarga() {
     }
 
-
     public VehiculoCarga(String placa, String modelo, String marca, String color, double capacidadCarga) {
         super(placa, modelo, marca, color);
         this.capacidadCarga = capacidadCarga;
@@ -29,9 +28,5 @@ public class VehiculoCarga extends Vehiculo{
         this.numeroEjes = numeroEjes;
     }
 
-    @Override
-    public void encender() {
-        System.out.println("Endenciendo el vehiculo para cargarlo");
-    }
 
 }
