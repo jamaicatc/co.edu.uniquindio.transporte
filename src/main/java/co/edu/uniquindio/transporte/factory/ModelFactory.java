@@ -50,13 +50,22 @@ public class ModelFactory {
     public Vehiculo obtenerVehiculo(String placa){
         return empresaTransporte.obtenerVehiculo(placa);
     }
-//
-//    public boolean eliminarVehiculo(String placa){
-//        return empresaTransporte.eliminarVehiculo(placa);
-//    }
-//
-//    public boolean actualizarVehiculo(Vehiculo vehiculo){
-//        return empresaTransporte.actualizarVehiculo(vehiculo);
-//    }
+
+    public VehiculoCarga obtenerVehiculoCarga(String cedula){
+        return empresaTransporte.obtenerVehiculoCarga(cedula);
+    }
+
+    public VehiculoPasajero obtenerVehiculoPasajero(String cedula){
+        return empresaTransporte.obtenerVehiculoPasajero(cedula);
+    }
+
+
+    public boolean eliminarVehiculo(String placa){
+        return empresaTransporte.eliminarVehiculo(placa);
+    }
+
+    public boolean actualizarVehiculo(Vehiculo vehiculo){
+        return empresaTransporte.actualizarVehiculo(vehiculo);
+    }
 
 }

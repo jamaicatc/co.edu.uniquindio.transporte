@@ -118,7 +118,7 @@ public class Main {
         agregarVehiculo();
         obtenerVehiculo();
 //        eliminarVehiculo();
-//        actualizarVehiculo();
+        actualizarVehiculo();
     }
 
     private static void agregarVehiculo() {
@@ -221,8 +221,8 @@ public class Main {
     }
 
     private static void eliminarVehiculo(){
-        String cedula = JOptionPane.showInputDialog("Ingrese la cédula del propietario a eliminar:");
-        boolean borrado = ModelFactory.getInstance().eliminarPropietario(cedula);
+        String cedula = JOptionPane.showInputDialog("Ingrese la cédula del propietario para eliminar el vehiculo:");
+        boolean borrado = ModelFactory.getInstance().eliminarVehiculo(cedula);
         if (borrado){
             JOptionPane.showMessageDialog(null, "Propietario eliminado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -230,44 +230,125 @@ public class Main {
         }
     }
 
-    private static void actualizarVehiculo(){
-        String cedula = JOptionPane.showInputDialog("Ingrese la cedula del propietario a actualizar");
-        Propietario propietario = ModelFactory.getInstance().obtenerPropietario(cedula);
-        if (propietario == null){
-            JOptionPane.showMessageDialog(null, "Propietario no encontrado");
-            return;
-        }
-        String[] opciones = {"Nombre", "Edad", "Email", "Teléfono"};
-        String seleccion = (String) JOptionPane.showInputDialog(
+    private static void actualizarVehiculo() {
+        String[] opciones = {"Vehículo de Carga", "Vehículo de Pasajeros"};
+        int eleccion = JOptionPane.showOptionDialog(
                 null,
-                "¿Que dato desea actualizar?",
-                "Actualizar Propietario",
+                "Seleccione el tipo de vehículo a actualizar",
+                "Actualizar Vehículo",
+                JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 opciones,
                 opciones[0]
         );
-        if(seleccion != null){
-            switch (seleccion){
-                case "Nombre":
-                    propietario.setNombre(JOptionPane.showInputDialog("Nuevo nombre:"));
+
+        if (eleccion == 0) {
+            actualizarVehiculoCarga();
+        } else if (eleccion == 1) {
+            actualizarVehiculoPasajero();
+        }
+    }
+
+    private static void actualizarVehiculoCarga() {
+        String cedula = JOptionPane.showInputDialog("Ingrese la cédula del propietario:");
+        VehiculoCarga vehiculo = ModelFactory.getInstance().obtenerVehiculoCarga(cedula);
+
+        if (vehiculo == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró un vehículo de carga para esa cédula");
+            return;
+        }
+
+        String[] opciones = {"Placa", "Modelo", "Marca", "Color", "Capacidad de Carga", "Número de Ejes"};
+        String seleccion = (String) JOptionPane.showInputDialog(
+                null,
+                "¿Qué dato desea actualizar?",
+                "Actualizar Vehículo de Carga",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opciones,
+                opciones[0]
+        );
+
+        if (seleccion != null) {
+            switch (seleccion) {
+                case "Placa":
+                    vehiculo.setPlaca(JOptionPane.showInputDialog("Nueva placa:"));
                     break;
-                case "Edad":
-                    propietario.setEdad(Integer.parseInt(JOptionPane.showInputDialog("Nueva edad:")));
+                case "Modelo":
+                    vehiculo.setModelo(JOptionPane.showInputDialog("Nuevo modelo:"));
                     break;
-                case "Email":
-                    propietario.setEmail(JOptionPane.showInputDialog("Nuevo email:"));
+                case "Marca":
+                    vehiculo.setMarca(JOptionPane.showInputDialog("Nueva marca:"));
                     break;
-                case "Teléfono":
-                    propietario.setNumeroCelular(JOptionPane.showInputDialog("Nuevo Teléfono:"));
+                case "Color":
+                    vehiculo.setColor(JOptionPane.showInputDialog("Nuevo color:"));
+                    break;
+                case "Capacidad de Carga":
+                    vehiculo.setCapacidadCarga(Double.parseDouble(JOptionPane.showInputDialog("Nueva capacidad:")));
+                    break;
+                case "Número de Ejes":
+                    vehiculo.setNumeroEjes(Integer.parseInt(JOptionPane.showInputDialog("Nuevo número de ejes:")));
                     break;
             }
         }
-        boolean actualizado = ModelFactory.getInstance().actualizarPropietario(propietario);
-        if (actualizado){
-            JOptionPane.showMessageDialog(null, "Propietario actualizado correctamente");
+
+        boolean actualizado = ModelFactory.getInstance().actualizarVehiculo(vehiculo);
+        if (actualizado) {
+            JOptionPane.showMessageDialog(null, "Vehículo de carga actualizado correctamente");
         } else {
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar el propietario");
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar el vehículo de carga");
+        }
+    }
+
+    private static void actualizarVehiculoPasajero() {
+        String cedula = JOptionPane.showInputDialog("Ingrese la cédula del propietario:");
+        VehiculoPasajero vehiculo = ModelFactory.getInstance().obtenerVehiculoPasajero(cedula);
+
+        if (vehiculo == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró un vehículo de carga para esa cédula");
+            return;
+        }
+
+        String[] opciones = {"Placa", "Modelo", "Marca", "Color", "Numero maximo de pasajeros", "Numero de Pasajeros Transportados"};
+        String seleccion = (String) JOptionPane.showInputDialog(
+                null,
+                "¿Qué dato desea actualizar?",
+                "Actualizar Vehículo Pasajero",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opciones,
+                opciones[0]
+        );
+
+        if (seleccion != null) {
+            switch (seleccion) {
+                case "Placa":
+                    vehiculo.setPlaca(JOptionPane.showInputDialog("Nueva placa:"));
+                    break;
+                case "Modelo":
+                    vehiculo.setModelo(JOptionPane.showInputDialog("Nuevo modelo:"));
+                    break;
+                case "Marca":
+                    vehiculo.setMarca(JOptionPane.showInputDialog("Nueva marca:"));
+                    break;
+                case "Color":
+                    vehiculo.setColor(JOptionPane.showInputDialog("Nuevo color:"));
+                    break;
+                case "Numero maximo de pasajeros":
+                    vehiculo.setNumeroMaximoPasajeros(Integer.parseInt(JOptionPane.showInputDialog("Nuevo numero maximo de pasajeros:")));
+                    break;
+                case "Numero de Pasajeros Transportados":
+                    vehiculo.setPasajerosTransportados(Integer.parseInt(JOptionPane.showInputDialog("Nuevo número de pasajeros transportados:")));
+                    break;
+            }
+        }
+
+        boolean actualizado = ModelFactory.getInstance().actualizarVehiculo(vehiculo);
+        if (actualizado) {
+            JOptionPane.showMessageDialog(null, "Vehículo de carga actualizado correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar el vehículo de carga");
         }
     }
 

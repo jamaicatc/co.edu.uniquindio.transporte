@@ -106,7 +106,6 @@ public class EmpresaTransporte {
 
         return true;
     }
-
     public Vehiculo obtenerVehiculo(String cedula){
         for (VehiculoCarga v : listaVehiculosCarga) {
             if (v.getPropietario().getNumeroIdentificacion().equals(cedula)) {
@@ -119,17 +118,70 @@ public class EmpresaTransporte {
                 return v;
             }
         }
-
-        // Si no se encuentra en ninguna lista
         return null;
     }
-//
-//    public boolean eliminarVehiculo(String placa){
-//    }
-//
-//    public boolean actualizarVehiculo(Vehiculo vehiculoActualizado){
-//
-//    }
+
+    public VehiculoCarga obtenerVehiculoCarga(String cedula) {
+        for (VehiculoCarga v : listaVehiculosCarga) {
+            if (v.getPropietario().getNumeroIdentificacion().equals(cedula)) {
+                return v;
+            }
+        }
+        return null;
+    }
+
+    public VehiculoPasajero obtenerVehiculoPasajero(String cedula) {
+        for (VehiculoPasajero v : listaVehiculosPasajeros) {
+            if (v.getPropietario().getNumeroIdentificacion().equals(cedula)) {
+                return v;
+            }
+        }
+        return null;
+    }
+
+    public boolean eliminarVehiculo(String placa){
+        Vehiculo v = obtenerVehiculo(placa);
+        if (v != null){
+            if (v instanceof VehiculoCarga){
+                listaVehiculosCarga.remove(v);
+                return true;
+            } else if (v instanceof  VehiculoPasajero) {
+                listaVehiculosPasajeros.remove(v);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean actualizarVehiculo(Vehiculo vehiculoActualizado){
+        Vehiculo existente = obtenerVehiculo(vehiculoActualizado.getPropietario().getNumeroIdentificacion());
+        if (existente != null) {
+            if (existente instanceof VehiculoCarga && vehiculoActualizado instanceof VehiculoCarga) {
+                VehiculoCarga existenteCarga = (VehiculoCarga) existente;
+                VehiculoCarga actualizadoCarga = (VehiculoCarga) vehiculoActualizado;
+                existenteCarga.setPlaca(actualizadoCarga.getPlaca());
+                existenteCarga.setModelo(actualizadoCarga.getModelo());
+                existenteCarga.setMarca(actualizadoCarga.getMarca());
+                existenteCarga.setColor(actualizadoCarga.getColor());
+                existenteCarga.setCapacidadCarga(actualizadoCarga.getCapacidadCarga());
+                existenteCarga.setNumeroEjes(actualizadoCarga.getNumeroEjes());
+
+                return true;
+            } else if (existente instanceof VehiculoPasajero && vehiculoActualizado instanceof VehiculoPasajero) {
+                VehiculoPasajero existentePasajero = (VehiculoPasajero) existente;
+                VehiculoPasajero actualizadoPasajero = (VehiculoPasajero) vehiculoActualizado;
+                existentePasajero.setPlaca(actualizadoPasajero.getPlaca());
+                existentePasajero.setModelo(actualizadoPasajero.getModelo());
+                existentePasajero.setMarca(actualizadoPasajero.getMarca());
+                existentePasajero.setColor(actualizadoPasajero.getColor());
+                existentePasajero.setNumeroMaximoPasajeros(actualizadoPasajero.getNumeroMaximoPasajeros());
+                existentePasajero.setPasajerosTransportados(actualizadoPasajero.getPasajerosTransportados());
+
+                return true;
+            }
+        }
+        return false;
+    }
 
     public ArrayList listaDePropietariosPesados(double peso){
         ArrayList<Propietario> propietariosPesados = new ArrayList<>();

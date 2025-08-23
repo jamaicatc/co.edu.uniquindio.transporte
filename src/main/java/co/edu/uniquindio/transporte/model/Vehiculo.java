@@ -65,11 +65,10 @@ public class Vehiculo {
 
     @Override
     public String toString() {
-        return "Vehiculo" +
-                "placa:" + placa + '\n' +
-                "modelo:" + modelo + '\n' +
-                "marca:" + marca + '\n' +
-                "color:" + color;
+        return "Placa: " + placa + '\n' +
+                "Modelo: " + modelo + '\n' +
+                "Marca: " + marca + '\n' +
+                "Color: " + color;
     }
 
     public static void seleccionarTipoVehiculo(EmpresaTransporte empresa, Propietario propietario){
