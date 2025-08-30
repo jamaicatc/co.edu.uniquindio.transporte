@@ -41,12 +41,13 @@ public class Main {
         };
         int opcion = JOptionPane.showConfirmDialog(null, mensaje,"Ingresar Datos Propietario",JOptionPane.OK_CANCEL_OPTION);
         if (opcion == JOptionPane.OK_OPTION){
-            Propietario datosPropietario = new Propietario();
-            datosPropietario.setNombre(nombreField.getText());
-            datosPropietario.setEdad(Integer.parseInt(edadField.getText()));
-            datosPropietario.setNumeroIdentificacion(numeroIdentificacionField.getText());
-            datosPropietario.setEmail(emailField.getText());
-            datosPropietario.setNumeroCelular(numeroCelularField.getText());
+            Propietario datosPropietario = Propietario.builder()
+                    .nombre(nombreField.getText())
+                    .edad(Integer.parseInt(edadField.getText()))
+                    .numeroIdentificacion(numeroIdentificacionField.getText())
+                    .email(emailField.getText())
+                    .numeroCelular(numeroCelularField.getText())
+                    .build();
             boolean agregado = ModelFactory.getInstance().agregarPropietario(datosPropietario);
             if (agregado) {
                 JOptionPane.showMessageDialog(null, "Propietario agregado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
@@ -94,26 +95,34 @@ public class Main {
                 opciones[0]
         );
         if(seleccion != null){
+            PropietarioBuilder builder = Propietario.builder()
+                    .nombre(propietario.getNombre())
+                    .edad(propietario.getEdad())
+                    .numeroIdentificacion(propietario.getNumeroIdentificacion())
+                    .email(propietario.getEmail())
+                    .numeroCelular(propietario.getNumeroCelular())
+                    .vehiculo(propietario.getVehiculo());
             switch (seleccion){
                 case "Nombre":
-                    propietario.setNombre(JOptionPane.showInputDialog("Nuevo nombre:"));
+                    builder.nombre(JOptionPane.showInputDialog("Nuevo nombre:", propietario.getNombre()));
                     break;
                 case "Edad":
-                    propietario.setEdad(Integer.parseInt(JOptionPane.showInputDialog("Nueva edad:")));
+                    builder.edad(Integer.parseInt(JOptionPane.showInputDialog("Nueva edad:", propietario.getEdad())));
                     break;
                 case "Email":
-                    propietario.setEmail(JOptionPane.showInputDialog("Nuevo email:"));
+                    builder.email(JOptionPane.showInputDialog("Nuevo email:", propietario.getEmail()));
                     break;
                 case "Teléfono":
-                    propietario.setNumeroCelular(JOptionPane.showInputDialog("Nuevo Teléfono:"));
+                    builder.numeroCelular(JOptionPane.showInputDialog("Nuevo Teléfono:", propietario.getNumeroCelular()));
                     break;
             }
-        }
-        boolean actualizado = ModelFactory.getInstance().actualizarPropietario(propietario);
-        if (actualizado){
-            JOptionPane.showMessageDialog(null, "Propietario actualizado correctamente");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar el propietario");
+            Propietario propietarioActualizado = builder.build();
+            boolean actualizado = ModelFactory.getInstance().actualizarPropietario(propietarioActualizado);
+            if (actualizado){
+                JOptionPane.showMessageDialog(null, "Propietario actualizado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar el propietario");
+            }
         }
     }
 
