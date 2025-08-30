@@ -88,6 +88,7 @@ public class EmpresaTransporte {
     public boolean actualizarPropietario(Propietario propietarioActualizado){
         Propietario existente = obtenerPropietario(propietarioActualizado.getNumeroIdentificacion());
         if (existente != null){
+            existente.build
             existente.setNombre(propietarioActualizado.getNombre());
             existente.setEdad(propietarioActualizado.getEdad());
             existente.setEmail(propietarioActualizado.getEmail());
